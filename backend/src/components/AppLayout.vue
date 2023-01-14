@@ -1,23 +1,36 @@
 <template>
-    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-md w-full space-y-8">
-        <div>
-          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            {{ title }} part of the layout
-          </h2>
-        </div>
+  <div class="min-h-full flex bg-gray-200">
+    <SideBar :class="{'-ml-[200px]': !SideBarOpened}"/>
+    <!--main-->
+    <div class="flex-1">
+      <Heading @toggle-sidebar="toggleSidebar"></Heading>
+      <main class="p-6">
+        <div class="p-4 rounded bg-white">
           <router-view></router-view>
-      </div>
+        </div>
+      </main>
     </div>
-  </template>
+  </div>
+</template>
   
-  <script setup>
-    const {title} = defineProps({
-      title: String
-    })
+<script setup>
+  import SideBar from "./SideBar.vue";
+  import Heading from "./Heading.vue";
+  import { ref } from "vue";
+
+const {title} = defineProps({
+  title: String
+})
+
+const SideBarOpened = ref(true)
+
+function toggleSidebar(){
+  SideBarOpened.value = !SideBarOpened.value;
+  console.log('Sidebar Opened');
+}
 
 
-  </script>
+</script>
   
   <style scoped>
   </style>
