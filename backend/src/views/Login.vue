@@ -1,6 +1,11 @@
 <template>
     <GuestLayout title="Sign in to your account">
       <form class="mt-8 space-y-6" @submit.prevent="login" method="POST">
+        <div v-if="errorMessage" class="flex items-center rounded justify-center py-3 px-5 bg-white text-red 500">
+          {{ errorMessage }}
+        </div>
+
+
         <input type="hidden" name="remember" value="true" />
         <div class="-space-y-px rounded-md shadow-sm">
           <div>
@@ -96,6 +101,11 @@
         <div>
           <button
             type="submit"
+            :disabled="loading"
+            :class="{
+              'cursor-not-allowed':loading,
+              'hover-bg-blue-500':loading
+            }"            
             class="
               group
               relative
@@ -117,6 +127,9 @@
               focus:ring-offset-2
             "
           >
+            <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24" v-if="loading">
+              <!-- ... -->
+            </svg>
             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
               <LockClosedIcon
                 class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"

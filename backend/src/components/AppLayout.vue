@@ -17,6 +17,7 @@
   import SideBar from "./SideBar.vue";
   import Navbar from "./Navbar.vue";
   import { ref, onMounted } from "vue";
+import store from "../store";
 
 const {title} = defineProps({
   title: String
@@ -24,6 +25,7 @@ const {title} = defineProps({
 
 onMounted( () => {
   SideBarOpened.value = false;
+  store.dispatch('getUser')
 })
 
 const SideBarOpened = ref(true)
