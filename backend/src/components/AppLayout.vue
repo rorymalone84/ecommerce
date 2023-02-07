@@ -46,6 +46,7 @@
   import Navbar from "./Navbar.vue";
   import { ref, onMounted, computed } from "vue";
   import store from "../store";
+  import LoadingSpinner from "./core/LoadingSpinner.vue";
 
 const {title} = defineProps({
   title: String
