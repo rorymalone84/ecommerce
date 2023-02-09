@@ -1,5 +1,6 @@
 <template>
   <div class="flex items-center justify-between mb-1">
+    <LoadingSpinner v-if="products.loading"/>
     <h1 class="text-1xl font-semibold">
       Products
     </h1>
@@ -65,8 +66,10 @@
 
 import {ref, computed, onMounted} from "vue";
 import store from "../store";
+import LoadingSpinner from "../components/core/LoadingSpinner.vue";
+import {PRODUCTS_PER_PAGE} from "../constants.js";
 
-const perPage = ref(10);
+const perPage = ref(PRODUCTS_PER_PAGE);
 const search = ref('');
 const products = computed(() => store.state.products);
 
@@ -74,11 +77,11 @@ onMounted(() => {
   getProducts()
 });
 
-getProducts(){
+function getProducts(){
   store.dispatch('getProducts')
-}
+};
 
 </script>
   
-  <style>
+<style>
 </style>
